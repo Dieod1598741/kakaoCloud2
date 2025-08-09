@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>과제</title>
+    </head>
+    <body>
+        <header>
+            <h1>메뉴</h1>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#register">회원가입</a>
+                    </li>
+                    <li>
+                        <a href="#profile">프로필 정보</a>
+                    </li>
+                    <li>
+                        <a href="#ask">문의하기</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+         <hr>
+        <main>
+             <form>
+            <section id="register" name="register">
+                <h2>회원가입</h2>
+                <p>
+                <label for="registerName">사용자 이름:</label>
+                <input id="registerName" name="register name" type="text" placeholder="사용자 이름 입력"></input>
+                </p>
+                <p>
+                <label for="registerEmail">이메일:</label>
+                <input id="registerEmail" name="registerEmail" type="email" placeholder="example@example.com" style="width: auto;"></input>
+                </p>
+                <p>
+                <label for="registerPassword">비밀번호:</label>
+                <input id="registerPassword" name="registerPassword" type="password" placeholder="비밀번호 입력"></input>
+                </p>
+                <p>
+                <!-- 
+                 -->
+                <label for="age">나이:</label>
+                <input type="number" id="age" name="age" min="1" max="120" placeholder="나이 입력">
+                </p>
+                <p>
+                <label>성별:</label>    
+                <input type="radio" name="gender" value="man">남성</input>
+                <input type="radio" name="gender" value="woman">여성</input>                
+                </p>
+                <p>
+                <label for="registerIntroduce">자기소개:</label>
+                <textarea id="registerIntroduce" name="registerIntroduce"placeholder="자기소개를 입력하세요."></textarea>
+                </p>
+                <p>
+                <label for="registerHobby">좋아하는 취미:</label>
+                <select id="registerHobby" name="registerHobby">
+                            <option disabled>스포츠</option>
+                            <option>축구</option>
+                            <option>농구</option>
+                            <option>테니스</option>
+                            <option disabled>예술</option>
+                            <option>음악</option>
+                            <option>미술</option>
+                            <option>사진</option>
+                            <option disabled>기타</option>
+                            <option>독서</option>
+                            <option>유행</option>
+                            <option>요리</option>
+                </select>
+                </p>
+                <p>
+                <label for="registerProfile">프로필 사진 업로드:</label>
+                <input type="file"id="registerProfile" name="registerProfile">
+                </p>
+            <button type="submit">회원가입</button>
+            <button type="reset">초기화</button>
+            업데이트 진행 상황: <progress value="" max="10"></progress>
+            </section>
+            </form>
+            <hr>
+             <section id="profile" name="profile">
+                <h2>프로필 정보</h2>
+                <table border="1">
+                        <colgroup>
+                    <col style="width: 20%;">
+                    <col style="width: 80%;">
+                </colgroup>
+                    <caption>프로필 정보 요약</caption>
+                    <thead>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </thead>
+                    <tr>
+                        <td>프로필</td>
+                        <td><img src="" alt="프로필 사진 미리보기"></td>
+                    </tr>
+                    <tr>
+                        <td>이름</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>이메일</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>이메일</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>나이</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>성별</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>자기소개</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>취미</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">프로필 정보가 성공적으로 업데이트되었습니다.</td>
+                    </tr>
+                </table>
+
+             </section>
+        </main>
+        <hr>
+        <footer  id="ask" name="ask">
+            <h2>문의하기</h2>
+            <address>
+                문의: <a href="">example@example.com</a> <br><br>
+                전화: 010-1234-5678 <br><br>
+                주소: 서울특별시 중구 예제로 123
+            </address>
+            <h3>오시는 길</h3>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d6330.8488293164255!2d127.02849999999998!3d37.497907!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sko!2skr!4v1754467112426!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><br>
+            <strong>Copyright © 2024</strong> 프로필 관리 페이지
+        </footer>
+    </body>
+</html>
