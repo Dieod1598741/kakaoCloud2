@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS_practice1.css">
+    <title>회원가입 CSS 예시</title>
+</head>
+
+<body>
+    <section class="headline">
+        <h1>회원가입</h1>
+    </section>
+    <section class="main">
+    <nav class="sidebar">
+        <ol>
+            <li><a href="#login">로그인</a></li>
+            <li><a href="#help">도움말</a></li>
+            <li><a href="#tos">약관</a></li>
+        </ol>
+    </nav>
+    <form class="loginbox" action="">
+        
+        <p class="info">
+            <label for="name">이름:</label>
+            <input class="inputarea" id="name" name="name" type="text">
+        </p>
+        
+        <p class="info">
+            <label for="email">이메일:</label>
+            <input class="inputarea"  id="email" name="email" type="email">
+        </p>
+        
+        <p class="info">
+        <label for="password">비밀번호:</label>
+        <input class="inputarea"  id="password" name="password" type="password">
+        </p>
+        
+        
+        <label class="info" for="gender">성별:</label>
+        <p>
+            <input type="radio" name="gender"> 남성</input>
+            <input type="radio" name="gender"> 여성</input>
+        </p>
+        
+        <p class="info">
+        <label class="click"  for="agree">
+        <input id=agree name=agree type="checkbox" required> 약관에 동의합니다.
+        </label>
+        </p>
+        
+        <p class="info">
+        <button class="inputarea"  type="submit">회원가입</button>
+        </p>
+    </form>
+    </section>
+    <footer class="endline">
+        <p>© 2024 MyWebsite | 연락처: email@example.com</p>
+    </footer>
+</body>
+
+</html>
