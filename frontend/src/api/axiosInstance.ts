@@ -1,0 +1,136 @@
+import axios from "axios";
+
+// skipErrorRedirect 및 skipAuth 속성을 위한 타입 확장
+declare module 'axios' {
+    export interface AxiosRequestConfig {
+        skipErrorRedirect?: boolean;
+        skipAuth?: boolean;  // 로그인/회원가입 요청은 401 인터셉터 스킵
+    }
+}
+
+// 메인 API 베이스 URL (영화, 추천 등)
+const API_BASE_URL =
+    process.env.NODE_ENV === "development"
+        ? "http://localhost:8000"  // Backend
+        : "https://api.movisr.com";
+
+// 회원가입 전용 API 베이스 URL (PostgreSQL 연동)
+const AUTH_BASE_URL =
+    process.env.NODE_ENV === "development"
+        ? "http://localhost:8000"  // Backend
+        : "https://auth.movisr.com";
+
+// 메인 axios 인스턴스 (영화, 추천 등)
+const axiosInstance = axios.create({
+    baseURL: API_BASE_URL,
+    withCredentials: true,
+    headers: {
+        "Content-Type": "application/json",
+    },
+});
+
+// 회원가입 전용 axios 인스턴스 (backend_sw)
+export const authAxiosInstance = axios.create({
+    baseURL: AUTH_BASE_URL,
+    withCredentials: true,
+    headers: {
+        "Content-Type": "application/json",
+    },
+});
+
+// ------------------------------
+// Request Interceptor: 쿠키 기반 인증 (토큰은 자동으로 쿠키에 포함됨)
+// ------------------------------
+const requestInterceptor = (config: any) => {
+    // 🍪 토큰은 HttpOnly 쿠키로 자동 전송됨 (withCredentials: true)
+    // Authorization 헤더 수동 설정 불필요
+    return config;
+};
+
+const requestErrorInterceptor = (error: any) => {
+    return Promise.reject(error);
+};
+
+// 메인 인스턴스에 적용
+axiosInstance.interceptors.request.use(
+    requestInterceptor,
+    requestErrorInterceptor
+);
+
+// 회원가입 인스턴스에도 적용
+authAxiosInstance.interceptors.request.use(
+    requestInterceptor,
+    requestErrorInterceptor
+);
+
+// ------------------------------
+// Response Interceptor: 401 처리 (쿠키 기반 인증)
+// ------------------------------
+const responseInterceptor = (response: any) => response;
+
+const responseErrorInterceptor = async (error: any) => {
+    const originalRequest = error.config;
+
+    // 401 에러 처리
+    // ⚠️ 단, 로그인/회원가입 요청은 제외 (skipAuth 플래그)
+    if (
+        error.response?.status === 401 &&
+        !originalRequest.skipAuth
+    ) {
+        // 🍪 쿠키 기반 인증: 401 에러 시 로그아웃 처리
+        // 사용자 정보만 제거 (토큰은 쿠키로 관리됨)
+        const hasUser = localStorage.getItem("user") || sessionStorage.getItem("user");
+
+        if (hasUser) {
+            // 로그인된 사용자의 세션이 만료된 경우
+            localStorage.removeItem("user");
+            localStorage.removeItem("rememberMe");
+            sessionStorage.removeItem("user");
+            sessionStorage.removeItem("rememberMe");
+
+            alert('로그인 세션이 만료되었습니다. 다시 로그인해주세요.');
+            window.location.href = "/";
+        }
+
+        return Promise.reject(error);
+    }
+
+    // [New] Error Page Redirection
+    // skipErrorRedirect 플래그가 있는 요청은 에러 페이지로 리다이렉트하지 않음
+    const skipErrorRedirect = originalRequest?.skipErrorRedirect;
+    const status = error.response?.status;
+    const currentPath = window.location.pathname;
+
+    if (!skipErrorRedirect) {
+        if (status === 400 && currentPath !== "/error/400") {
+            window.location.href = "/error/400";
+            return Promise.reject(error);
+        }
+
+        if (status === 423 && currentPath !== "/error/423") {
+            window.location.href = "/error/423";
+            return Promise.reject(error);
+        }
+
+        if (status === 500 && currentPath !== "/error/500") {
+            window.location.href = "/error/500";
+            return Promise.reject(error);
+        }
+    }
+
+    return Promise.reject(error);
+};
+
+// 메인 인스턴스에 적용
+axiosInstance.interceptors.response.use(
+    responseInterceptor,
+    responseErrorInterceptor
+);
+
+// 회원가입 인스턴스에도 적용
+authAxiosInstance.interceptors.response.use(
+    responseInterceptor,
+    responseErrorInterceptor
+);
+
+export default axiosInstance;
