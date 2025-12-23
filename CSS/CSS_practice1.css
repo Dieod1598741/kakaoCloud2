@@ -1,0 +1,89 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+.headline {
+    display: flex;
+    padding-top: 20px;
+    width: 100%;
+    height: 200px;
+    background-image: url(imageset/css예제\ 사진.avif);
+    justify-content: center;
+    color: aliceblue;
+    font-size: 16px;
+h1 {
+    font-size: 32px;
+}
+}
+.sidebar {
+    color: aliceblue;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-left: 20px;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+}
+ol > li a {
+    position: absolute;
+    background-color:forestgreen;
+    padding: 15px 10px 15px 10px;
+    width: 168px;
+    height: 46px;
+    color: aliceblue;
+}
+ol > li a:hover {
+    transition: 0.3s;
+    background-color: darkgreen;
+}
+li {
+    margin-top: 15px;
+    width: 168px;
+    height: 46px;
+}
+.loginbox {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    margin: 10px 40% 0px 40%;
+    padding: 10px;
+    width: 300px;
+    height: 404px;
+}
+.loginbox label[for="name"]::before {
+    content: '👤';
+    margin-right: 5px;
+}
+.info {
+    margin: 15PX 0PX 0PX 0PX;
+    width: 100%;
+}
+.inputarea {
+    width: 100%;
+    height: 35PX;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+}
+.info>button {
+    color: aliceblue;
+    background-color: forestgreen;
+}
+button:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+.endline {
+    position: absolute;
+    background-color:black;
+    color: aliceblue;
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    margin-top: 30%;
+    padding: 10px;
+}

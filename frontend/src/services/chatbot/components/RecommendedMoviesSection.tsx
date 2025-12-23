@@ -96,13 +96,8 @@ function RecommendedList() {
         isEmpty: true
     });
 
-    // 빈 카드는 3개 미만일 때만 채우기 (캐러셀이 4개부터 작동하므로)
-    const displayMovies = [...recommendedMovies];
-    if (displayMovies.length < 3) {
-        while (displayMovies.length < 3) {
-            displayMovies.push(createEmptyCard(displayMovies.length));
-        }
-    }
+    // 전체 영화를 그대로 표시 (빈 카드 채우기 제거)
+    const displayMovies = recommendedMovies;
 
     return (
         <MovieCarousel>
@@ -111,12 +106,12 @@ function RecommendedList() {
                     key={movie.id}
                     movie={{
                         ...movie,
-                        watched: movie.isEmpty ? false : watchedMovieIds.includes(movie.id)
+                        watched: watchedMovieIds.includes(movie.id)
                     }}
-                    onClick={movie.isEmpty ? () => { } : () => setDetailMovieId(movie.id)}
-                    onReRecommend={movie.isEmpty ? undefined : () => removeRecommendedMovie(movie.id)}
-                    onAddToWatched={movie.isEmpty ? undefined : () => handleAddToWatched(movie.id)}
-                    showReRecommend={!movie.isEmpty}
+                    onClick={() => setDetailMovieId(movie.id)}
+                    onReRecommend={() => removeRecommendedMovie(movie.id)}
+                    onAddToWatched={() => handleAddToWatched(movie.id)}
+                    showReRecommend={true}
                 />
             ))}
         </MovieCarousel>

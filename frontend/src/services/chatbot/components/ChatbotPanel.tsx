@@ -210,6 +210,7 @@ export default function ChatbotPanel({ isOpen, onClose }: ChatbotPanelProps) {
           z-panel
           flex flex-col
           transition-opacity duration-200
+          max-w-screen-xl mx-auto
           ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
         `}
         style={{ transition: 'opacity 0.2s ease-in-out' }}
@@ -240,9 +241,9 @@ export default function ChatbotPanel({ isOpen, onClose }: ChatbotPanelProps) {
                 <div
                   className={`
                     rounded-[15px] p-3 border-2 shadow-sm
-                    max-w-[75%] sm:max-w-[80%] lg:max-w-[85%]
+                    max-w-[75%] sm:max-w-[80%]
                     ${msg.type === 'bot'
-                      ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-900 dark:border-gray-600 ml-[70px] sm:ml-[150px] lg:ml-[320px]'
+                      ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white border-gray-900 dark:border-gray-600 ml-[70px] sm:ml-[400px] md:ml-[145px] lg:ml-[270px] xl:ml-[400px]'
                       : 'bg-blue-100 dark:bg-blue-900/50 text-gray-900 dark:text-white border-gray-900 dark:border-blue-700'
                     }
                   `}
